@@ -14,6 +14,7 @@ var commands = []
 func _ready():
 	self.writing = false
 	self.inputstr = ""
+	add_to_group("Console")
 
 func _input(event):
 	if event is InputEvent and event.is_pressed():
@@ -37,10 +38,10 @@ func _input(event):
 				if s == "Shift+7":
 					self.inputstr = self.inputstr + "/"
 				
-				self.inputstr = self.inputstr + s
-#
-#				if s.length() == 1:
-#					self.inputstr = self.inputstr + s.to_lower()
+#				self.inputstr = self.inputstr + s
+
+				if s.length() == 1:
+					self.inputstr = self.inputstr + s.to_lower()
 		elif event.is_action_pressed("ui_write"):
 			self.writing = true
 
@@ -64,5 +65,9 @@ func _set_writing(val):
 	
 	if writing:
 		$GUILayer/WritingLabel.visible = true
+		$GUILayer/TextInputDisplay.visible = true
+		$GUILayer/ColorRect.visible = true
 	else:
 		$GUILayer/WritingLabel.visible = false
+		$GUILayer/TextInputDisplay.visible = false
+		$GUILayer/ColorRect.visible = false
