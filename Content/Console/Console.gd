@@ -4,13 +4,29 @@ var inputstr = "" setget _set_inputstr
 
 var writing = false setget _set_writing
 
-signal spawn_command
+signal delete_command
+signal color_command
+signal move_command
+signal copy_command
+signal list_command
 
 
 var history = []
 var index = 0
 
-var commands = []
+var errors = {
+	"noTarget": "you have to specify a target",
+	"noCommand": "command %s undefined",
+}
+
+var help = {
+	"help": "commands --> delete  spawn  move  color",
+	"delete": "delete <<id>> --> It deletes the object specified",
+	"color": "color <<id>> <<color>> --> It changes the color of the object to red, blue, green or black",
+	"move": "move <<id>> <<x>> <<y>> --> It moves the object a few coordinates",
+	"copy": "copy <<id>> --> It copies the object",
+	"list": "list --> List of avaiable objects"
+}
 
 
 func _ready():
@@ -41,6 +57,8 @@ func _input(event):
 					self.inputstr = self.inputstr + "-"
 				if s == "Shift+7":
 					self.inputstr = self.inputstr + "/"
+				if s == "Shift+Minus":
+					self.inputstr = self.inputstr + "_"
 				if s == "Up":
 					historyUp()
 				if s == "Down":
@@ -58,6 +76,10 @@ func historyApend():
 
 	
 func historyUp():
+	if history.size() == 0:
+		self.inputstr = ""
+		return
+	
 	index = index + 1
 	if index > history.size():
 		index = history.size()
@@ -92,22 +114,65 @@ func _set_writing(val):
 		$GUILayer/TextInputDisplay.visible = false
 		$GUILayer/ColorRect.visible = false
 		
-		
+
+func out(text):
+	$GUILayer/Output.pushLine(text)
+
 func execute(command):
-	var commandList = command.rsplit(" ", false)
-	var options = []
-	var target = ""
+	var params = command.rsplit(" ", false)
+
+	command = params[0]
 	
-	command = commandList[0]
-	
-	for c in commandList:
-		if c[0] == "-":
-			options.append(c)
+	if command == "help":
+		if params.size() > 1:
+			print(params)
+			if help.has(params[1]):
+				out(help[params[1]])
+			else:
+				out(errors["noCommand"]%[params[1]])
 		else:
-			if target == "":
-				target = c
-	
-	$GUILayer/Output.pushLine(command)
+			out("Avaiable commands -->  delete  color  move  copy  list")
+			
+	elif command == "delete":
+		if params.size() < 2:
+			out(errors["noParams"])
+			return
+			
+		emit_signal("delete_command", params[1])
+		
+	elif command == "color":
+		if params.size() < 3:
+			out(errors["noParams"])
+			return
+			
+		emit_signal("color_command", params[1], params[2])
+		
+	elif command == "move":
+		if params.size() < 4:
+			out(errors["noParams"])
+			return
+			
+		emit_signal("move_command", params[1], params[2], params[3])
+		
+	elif command == "copy":
+		if params.size() < 2:
+			out(errors["noParams"])
+			return
+			
+		emit_signal("copy_command", params[1])
+		
+	elif command == "list":
+		var scriptable = get_tree().get_nodes_in_group("Scriptable")
+		var text = ""
+		
+		for s in scriptable:
+			text = text + " " + s.get_name()
+		
+		if text == "":
+			text = "There is nothing to list"
+		out(text)
+	else:
+		out(errors["noCommand"]%[command])
 		
 	
 	

@@ -55,3 +55,5 @@ margin_right = 889.0
 margin_bottom = 528.0
 custom_fonts/font = SubResource( 3 )
 script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="GUILayer/Output"]
