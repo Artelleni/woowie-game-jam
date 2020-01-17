@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Content/Console/Label.gd" type="Script" id=1]
+[ext_resource path="res://Content/Console/Console.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Font/PIXELADE.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://Content/Console/Output.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -10,6 +11,12 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_color = Color( 0.964706, 0.345098, 0.345098, 0.854902 )
+extra_spacing_char = 2
 font_data = ExtResource( 2 )
 
 [node name="Console" type="Node2D"]
@@ -40,3 +47,11 @@ margin_bottom = 561.339
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.443137, 0.443137, 1 )
 text = "! "
+
+[node name="Output" type="Label" parent="GUILayer"]
+margin_left = 137.0
+margin_top = 430.0
+margin_right = 889.0
+margin_bottom = 528.0
+custom_fonts/font = SubResource( 3 )
+script = ExtResource( 3 )
