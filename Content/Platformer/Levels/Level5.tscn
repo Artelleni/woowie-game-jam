@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Content/Console/Console.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Content/Platformer/StaticPlatform/StaticPlatform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Content/Platformer/ScriptablePlatform/ScriptablePlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Platformer/Character/Character.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Content/Platformer/Enemy/Spikes.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Platformer/StaticPlatform/StaticPlatformBig.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/Platformer/EndOfLevel/EndOfLevel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Content/Platformer/EndOfLevel/EndOfLevel.gd" type="Script" id=8]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 1, 0 )
+
+[node name="Console" parent="." instance=ExtResource( 1 )]
+position = Vector2( 376.64, 247.118 )
+
+[node name="Bounderys" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="StaticPlatform" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 120.356, 658.169 )
+
+[node name="StaticPlatform11" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 120.598, -57.3729 )
+
+[node name="StaticPlatform7" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( -62.4953, 491.306 )
+rotation = 1.5708
+
+[node name="StaticPlatform2" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 379.286, 658.169 )
+
+[node name="StaticPlatform10" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 379.528, -57.3729 )
+
+[node name="StaticPlatform8" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( -62.7524, 232.119 )
+rotation = 1.5708
+
+[node name="StaticPlatform3" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 639.509, 658.169 )
+
+[node name="StaticPlatform12" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 639.751, -57.3729 )
+
+[node name="StaticPlatform6" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 1084.01, 550.375 )
+rotation = 1.5708
+
+[node name="StaticPlatform4" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 899.605, 658.169 )
+
+[node name="StaticPlatform9" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 899.847, -57.3729 )
+
+[node name="StaticPlatform5" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 1084.14, 290.564 )
+rotation = 1.5708
+
+[node name="StaticPlatform13" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( 1084.9, 29.8513 )
+rotation = 1.5708
+
+[node name="StaticPlatform14" parent="Bounderys" instance=ExtResource( 2 )]
+position = Vector2( -63.0988, -27.6818 )
+rotation = 1.5708
+
+[node name="pl1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 593.368, 358.319 )
+
+[node name="pl2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 448.38, 370.317 )
+
+[node name="Character" parent="." instance=ExtResource( 4 )]
+position = Vector2( 99.6732, 334.84 )
+jumpForce = 800
+
+[node name="Spikes" parent="." instance=ExtResource( 5 )]
+position = Vector2( 307.757, 589.616 )
+
+[node name="Spikes2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 490.644, 589.13 )
+
+[node name="Spikes3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 677.422, 589.13 )
+
+[node name="StaticPlatformBig" parent="." instance=ExtResource( 6 )]
+position = Vector2( 117.818, 537.957 )
+
+[node name="StaticPlatformBig2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 896.812, 549.413 )
+
+[node name="EndOfLevel" parent="." instance=ExtResource( 7 )]
+position = Vector2( 896.449, 357.974 )
+script = ExtResource( 8 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node"]
+position = Vector2( -98.6151, 91.9669 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Node"]
+position = Vector2( 339.059, 93.0749 )
+collision_layer = 2
+collision_mask = 2

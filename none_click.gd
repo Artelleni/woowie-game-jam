@@ -1,4 +1,4 @@
-extends "res://Content/ScriptableObject/ScpritableObject.gd"
+extends Area2D
 
 # Declare member variables here. Examples:
 # var a = 2

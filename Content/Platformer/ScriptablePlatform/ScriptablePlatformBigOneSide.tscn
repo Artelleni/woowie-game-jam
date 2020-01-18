@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Content/ScriptableObject/ScpritableObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Content/Platformer/ScriptablePlatform/ScriptablePlatform.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 89.7875, 93.7262 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 88.7764, 6.65599 )
+
+[node name="ScriptablePlatformBigOneSide" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+scale = Vector2( 2.84, 2.8974 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlitchArea2D" index="0"]
+position = Vector2( 0.417542, -81.9354 )
+shape = SubResource( 2 )
+[connection signal="end_glitch" from="." to="." method="_on_ScpritablePlatform_end_glitch"]
+[connection signal="start_glitch" from="." to="." method="_on_ScpritablePlatform_start_glitch"]

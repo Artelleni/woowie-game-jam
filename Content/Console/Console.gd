@@ -17,10 +17,11 @@ var index = 0
 var errors = {
 	"noTarget": "you have to specify a target",
 	"noCommand": "command %s undefined",
+	"noParams": "not enought parameters for this command. Check help for more info"
 }
 
 var help = {
-	"help": "commands --> delete  spawn  move  color",
+	"help": "help <<command>> for more info. Avaiable commands -->  delete  color  move  copy  list",
 	"delete": "delete <<id>> --> It deletes the object specified",
 	"color": "color <<id>> <<color>> --> It changes the color of the object to red, blue, green or black",
 	"move": "move <<id>> <<x>> <<y>> --> It moves the object a few coordinates",
@@ -131,7 +132,7 @@ func execute(command):
 			else:
 				out(errors["noCommand"]%[params[1]])
 		else:
-			out("Avaiable commands -->  delete  color  move  copy  list")
+			out("help <<command>> for more info. Avaiable commands -->  delete  color  move  copy  list")
 			
 	elif command == "delete":
 		if params.size() < 2:

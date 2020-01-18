@@ -2,10 +2,23 @@ extends Node2D
 
 
 var console = null
+export var glitch = false
+
+const GLITCH_RATE = 0.5
+var glitchingAreas = 0
+
+signal start_glitch
+signal end_glitch
+
 
 func _ready():
+	if glitch:
+		emit_signal("start_glitch")
+		
 	var consoles = get_tree().get_nodes_in_group("Console")
 	add_to_group("Scriptable")
+	
+	$GlitchArea2D.add_to_group("Glitch_Area")
 	
 	if consoles.size() > 0:
 		console = consoles[0]
@@ -16,6 +29,29 @@ func _ready():
 		console.connect("copy_command", self, "_copy_command")
 
 
+func glitch(time=-1):
+	glitch = true
+	emit_signal("start_glitch")
+	
+	if time > 0:
+		$GlitchTimer.wait_time = time
+		$GlitchTimer.start()
+		
+		
+func unGlitch():
+	glitch = false
+	visible = true
+	emit_signal("end_glitch")
+
+
+func _process(delta):
+	if glitch:
+		if randf() > GLITCH_RATE:
+			visible = true
+		else:
+			visible = false
+
+			
 
 func _delete_command(id):
 	if id == name:
@@ -67,3 +103,23 @@ func _copy_command(id):
 		new.name = name + "_" + String(nCopies)
 		new.position = lastCopyPos - Vector2(100, 100)
 		get_parent().add_child(new)
+
+
+func _on_GlitchTimer_timeout():
+	unGlitch()
+
+
+func _on_GlitchArea2D_area_entered(area):
+	if area.is_in_group("Glitch_Area"):
+		glitch()
+		glitchingAreas = glitchingAreas + 1
+
+
+
+
+func _on_GlitchArea2D_area_exited(area):
+	if area.is_in_group("Glitch_Area"):
+		glitchingAreas = glitchingAreas - 1
+		if glitchingAreas == 0:
+			unGlitch()
+		
