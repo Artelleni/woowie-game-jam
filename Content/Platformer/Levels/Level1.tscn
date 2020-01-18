@@ -6,7 +6,7 @@
 [ext_resource path="res://Content/Platformer/EndOfLevel/EndOfLevel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Content/Platformer/Character/Character.tscn" type="PackedScene" id=5]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 position = Vector2( 1, 0 )
 
 [node name="Console" parent="." instance=ExtResource( 1 )]

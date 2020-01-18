@@ -4,9 +4,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Content/GlitchableObject/GlitchableObject.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 26.277
-height = 10.7521
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 31.5455, 31.3969 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30.7879, 30.9613 )
@@ -21,7 +20,7 @@ modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 editor/display_folded = true

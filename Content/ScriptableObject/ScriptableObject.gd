@@ -103,6 +103,13 @@ func _copy_command(id):
 		new.name = name + "_" + String(nCopies)
 		new.position = lastCopyPos - Vector2(100, 100)
 		get_parent().add_child(new)
+		
+		new.glitchingAreas = new.checkIfGlitching()
+		if new.glitchingAreas == 0:
+			new.unGlitch()
+		else:
+			new.glitch()
+		
 
 
 func _on_GlitchTimer_timeout():
@@ -115,6 +122,15 @@ func _on_GlitchArea2D_area_entered(area):
 		glitchingAreas = glitchingAreas + 1
 
 
+func checkIfGlitching():
+	var areas = get_tree().get_nodes_in_group("Glitch_Area")
+	var count = 0
+	
+	for a in areas:
+		if a is Area2D:
+			if $GlitchArea2D.overlaps_area(a):
+				count += 1
+	return count
 
 
 func _on_GlitchArea2D_area_exited(area):

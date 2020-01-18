@@ -69,6 +69,15 @@ func _on_GlitchArea2D_area_entered(area):
 		glitchingAreas = glitchingAreas + 1
 
 
+func checkIfGlitching():
+	var areas = get_tree().get_nodes_in_group("Glitch_Area")
+	
+	for a in areas:
+		if a is Area2D:
+			if $GlitchArea2D.overlaps_area(a):
+				return true
+	return false
+	
 
 # Checks if overlaping stoped
 func _on_GlitchArea2D_area_exited(area):
